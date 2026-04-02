@@ -23,7 +23,7 @@ class ProductCardComponent extends Component<Props, State> {
 
   handleNavigate = () => {
     this.props.history.push({
-      pathname: `/product/${this.props.product.id}/details`,
+      pathname: `/product/${this.props.product.id}`,
       state: { product: this.props.product }
     });
   }
@@ -37,7 +37,7 @@ class ProductCardComponent extends Component<Props, State> {
   render() {
     const { product } = this.props;
     const { isHovered, buttonHovered } = this.state;
-    
+
     // Safety check for images array since sometimes API returns badly formatted strings
     let imageUrl = '';
     if (product.images && product.images.length > 0) {
@@ -51,7 +51,7 @@ class ProductCardComponent extends Component<Props, State> {
     }
 
     return (
-      <div 
+      <div data-testid="product-card"
         onClick={this.handleNavigate}
         onMouseEnter={() => this.setState({ isHovered: true })}
         onMouseLeave={() => this.setState({ isHovered: false })}
@@ -74,11 +74,11 @@ class ProductCardComponent extends Component<Props, State> {
           alt={product.title}
           style={{ width: '100%', height: '220px', objectFit: 'contain', marginBottom: '12px' }}
         />
-        
+
         <div style={{ color: '#565959', fontSize: '12px', marginBottom: '4px', textTransform: 'uppercase', fontWeight: 600 }}>
           {product.category?.name}
         </div>
-        
+
         <h3 style={{
           fontSize: '16px',
           lineHeight: '1.4',
@@ -93,7 +93,7 @@ class ProductCardComponent extends Component<Props, State> {
         }}>
           {product.title}
         </h3>
-        
+
         <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
           <span style={{ color: '#ffa41c', fontSize: '18px', marginRight: '4px' }}>&#9733;&#9733;&#9733;&#9733;&#9734;</span>
           <span style={{ color: '#007185', fontSize: '14px' }}>1,234</span>
@@ -108,7 +108,7 @@ class ProductCardComponent extends Component<Props, State> {
             </span>
           </div>
 
-          <button 
+          <button data-testid="add-to-cart"
             onClick={this.handleAddToCart}
             onMouseEnter={() => this.setState({ buttonHovered: true })}
             onMouseLeave={() => this.setState({ buttonHovered: false })}

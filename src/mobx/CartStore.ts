@@ -3,6 +3,7 @@ import { Product } from '../types/product';
 
 export class CartStore {
   items: Product[] = [];
+  searchQuery: string = '';
 
   constructor() {
     makeAutoObservable(this);
@@ -20,6 +21,17 @@ export class CartStore {
     this.items.push(product);
   }
 
+  removeItem = (productId: number | string) => {
+    const index = this.items.findIndex(item => item.id === productId);
+    if (index > -1) {
+      this.items.splice(index, 1);
+    }
+  }
+
+  setSearchQuery = (query: string) => {
+    this.searchQuery = query;
+  }
+
   loadCart = () => {
     try {
       const stored = localStorage.getItem('mobx_cartItems');
@@ -32,7 +44,7 @@ export class CartStore {
   }
 
   get totalPrice(): number {
-    return this.items.reduce((total, item) => total + item.price, 0);
+    return this.items.reduce((total, item) => total + Number(item.price), 0);
   }
 
   get totalCount(): number {

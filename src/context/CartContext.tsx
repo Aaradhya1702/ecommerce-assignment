@@ -4,6 +4,7 @@ import { Product } from '../types/product';
 export interface CartContextType {
   cartItems: Product[];
   addToCart: (product: Product) => void;
+  removeFromCart: (productId: number | string) => void;
 }
 
 export const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -46,12 +47,23 @@ export class CartProvider extends Component<Props, State> {
     }));
   }
 
+  removeFromCart = (productId: number | string) => {
+    this.setState((prevState) => {
+      const index = prevState.cartItems.findIndex(item => item.id === productId);
+      if (index === -1) return prevState;
+      const newItems = [...prevState.cartItems];
+      newItems.splice(index, 1);
+      return { cartItems: newItems };
+    });
+  }
+
   render() {
     return (
       <CartContext.Provider
         value={{
           cartItems: this.state.cartItems,
           addToCart: this.addToCart,
+          removeFromCart: this.removeFromCart
         }}
       >
         {this.props.children}

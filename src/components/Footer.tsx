@@ -1,47 +1,42 @@
 import React, { Component } from 'react';
-import { observer } from 'mobx-react';
-import { cartStore } from '../mobx/CartStore';
 
-class FooterComponent extends Component {
+export class Footer extends Component {
   render() {
     return (
       <footer style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
         backgroundColor: '#232f3e',
         color: '#ffffff',
-        padding: '16px 32px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        zIndex: 1000,
-        boxShadow: '0 -2px 10px rgba(0,0,0,0.1)'
+        padding: '40px 24px 20px',
+        width: '100%',
+        marginTop: 'auto',
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0
       }}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <span style={{ fontSize: '14px', color: '#ccc' }}>Subtotal ({cartStore.totalCount} items):</span>
-          <span style={{ fontSize: '20px', fontWeight: 'bold', color: '#fff' }}>${cartStore.totalPrice.toFixed(2)}</span>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'flex', justifyContent: 'center', gap: '40px', flexWrap: 'wrap', marginBottom: '32px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <h4 style={{ margin: '0 0 8px 0', fontSize: '16px' }}>Get to Know Us</h4>
+            <a href="#" style={{ color: '#ddd', textDecoration: 'none', fontSize: '14px' }}>About Ganga</a>
+            <a href="#" style={{ color: '#ddd', textDecoration: 'none', fontSize: '14px' }}>Careers</a>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <h4 style={{ margin: '0 0 8px 0', fontSize: '16px' }}>Help & Support</h4>
+            <a href="#" style={{ color: '#ddd', textDecoration: 'none', fontSize: '14px' }}>Contact Us</a>
+            <a href="#" style={{ color: '#ddd', textDecoration: 'none', fontSize: '14px' }}>Returns center</a>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+            <h4 style={{ margin: '0 0 8px 0', fontSize: '16px' }}>Policies</h4>
+            <a href="#" style={{ color: '#ddd', textDecoration: 'none', fontSize: '14px' }}>Privacy Policy</a>
+            <a href="#" style={{ color: '#ddd', textDecoration: 'none', fontSize: '14px' }}>Terms of Service</a>
+          </div>
         </div>
-        <div>
-          <button style={{
-            backgroundColor: '#ffd814',
-            color: '#0f1111',
-            border: 'none',
-            borderRadius: '8px',
-            padding: '10px 24px',
-            fontSize: '14px',
-            fontWeight: 'bold',
-            cursor: 'pointer',
-            boxShadow: '0 1px 2px rgba(0,0,0,0.1)'
-          }}>
-            Proceed to checkout
-          </button>
+        
+        <div style={{ borderTop: '1px solid #3a4553', paddingTop: '20px', textAlign: 'center' }}>
+          <p style={{ margin: 0, fontSize: '14px', color: '#ccc' }}>&copy; {new Date().getFullYear()} Ganga Stores, Inc. or its affiliates</p>
         </div>
       </footer>
     );
   }
 }
-
-export const Footer = observer(FooterComponent);
 
