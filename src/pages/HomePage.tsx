@@ -40,7 +40,7 @@ export class HomePage extends Component<{}, State> {
   getColumns = () => {
     if (window.innerWidth < 768) return 1;
     if (window.innerWidth < 1024) return 2;
-    return 3;
+    return 4;
   }
 
   handleResize = () => {
@@ -122,81 +122,90 @@ export class HomePage extends Component<{}, State> {
     const displayedProducts = this.getSortedProducts();
 
     return (
-      <div style={{ backgroundColor: '#f5f5f5', minHeight: '100vh', padding: '32px', paddingBottom: '100px' }}>
-        <div style={{ backgroundColor: 'white', padding: '24px', borderRadius: '8px', marginBottom: '32px', boxShadow: '0 2px 8px rgba(0,0,0,0.05)', maxWidth: '1200px', margin: '0 auto 32px' }}>
-          <h2 style={{ marginTop: 0, marginBottom: '16px', fontSize: '20px' }}>Filters</h2>
-          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'flex-end' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', flex: '1 1 200px' }}>
-              <label style={{ fontSize: '14px', marginBottom: '8px', fontWeight: 'bold' }}>Search Title</label>
-              <input
-                name="searchTitle"
-                type="text"
-                value={searchTitle}
-                onChange={this.handleFilterChange}
-                placeholder="e.g. shirt"
-                style={{ padding: '10px 16px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
-              />
-            </div>
+      <div style={{ backgroundColor: '#eaeded', minHeight: '100vh', padding: '16px', paddingBottom: '100px', fontFamily: '"Amazon Ember", Arial, sans-serif' }}>
+        <div style={{ 
+          backgroundColor: '#fafafa', 
+          padding: '12px 24px', 
+          borderRadius: '4px', 
+          marginBottom: '24px', 
+          border: '1px solid #ddd', 
+          maxWidth: '1400px', 
+          margin: '0 auto 24px',
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          gap: '12px',
+          boxShadow: '0 1px 2px rgba(0,0,0,0.05)'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: '1 1 auto' }}>
+            <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#0f1111' }}>Filters:</span>
+            
+            <input
+              name="searchTitle"
+              type="text"
+              value={searchTitle}
+              onChange={this.handleFilterChange}
+              placeholder="Search items..."
+              style={{ padding: '6px 12px', fontSize: '13px', borderRadius: '4px', border: '1px solid #a6a6a6', outline: 'none', maxWidth: '150px' }}
+            />
 
-            <div style={{ display: 'flex', flexDirection: 'column', flex: '1 1 120px' }}>
-              <label style={{ fontSize: '14px', marginBottom: '8px', fontWeight: 'bold' }}>Min Price</label>
-              <input
-                name="priceMin"
-                type="number"
-                value={priceMin}
-                onChange={this.handleFilterChange}
-                placeholder="0"
-                style={{ padding: '10px 16px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
-              />
-            </div>
+            <input
+              name="priceMin"
+              type="number"
+              value={priceMin}
+              onChange={this.handleFilterChange}
+              placeholder="Min $"
+              style={{ padding: '6px 12px', fontSize: '13px', borderRadius: '4px', border: '1px solid #a6a6a6', outline: 'none', width: '80px' }}
+            />
 
-            <div style={{ display: 'flex', flexDirection: 'column', flex: '1 1 120px' }}>
-              <label style={{ fontSize: '14px', marginBottom: '8px', fontWeight: 'bold' }}>Max Price</label>
-              <input
-                name="priceMax"
-                type="number"
-                value={priceMax}
-                onChange={this.handleFilterChange}
-                placeholder="500"
-                style={{ padding: '10px 16px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
-              />
-            </div>
+            <input
+              name="priceMax"
+              type="number"
+              value={priceMax}
+              onChange={this.handleFilterChange}
+              placeholder="Max $"
+              style={{ padding: '6px 12px', fontSize: '13px', borderRadius: '4px', border: '1px solid #a6a6a6', outline: 'none', width: '80px' }}
+            />
 
-            <div style={{ display: 'flex', flexDirection: 'column', flex: '1 1 200px' }}>
-              <label style={{ fontSize: '14px', marginBottom: '8px', fontWeight: 'bold' }}>Category</label>
-              <select
-                name="selectedCategorySlug"
-                value={selectedCategorySlug}
-                onChange={this.handleFilterChange}
-                style={{ padding: '10px 16px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
-              >
-                <option value="">All Categories</option>
-                {categories.map(cat => (
-                  <option key={cat.id} value={cat.slug || cat.id}>{cat.name}</option>
-                ))}
-              </select>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', flex: '1 1 200px' }}>
-              <label style={{ fontSize: '14px', marginBottom: '8px', fontWeight: 'bold' }}>Local Sorting</label>
-              <select
-                value={sortOrder}
-                onChange={this.handleSortChange}
-                style={{ padding: '10px 16px', fontSize: '16px', borderRadius: '4px', border: '1px solid #ccc' }}
-              >
-                <option value="">Default Sort</option>
-                <option value="asc">Price Low to High</option>
-                <option value="desc">Price High to Low</option>
-              </select>
-            </div>
-
-            <button
-              onClick={this.handleApplyFilters}
-              style={{ padding: '12px 24px', backgroundColor: '#2563eb', color: '#fff', border: 'none', borderRadius: '4px', fontSize: '16px', cursor: 'pointer', fontWeight: 'bold' }}
+            <select
+              name="selectedCategorySlug"
+              value={selectedCategorySlug}
+              onChange={this.handleFilterChange}
+              style={{ padding: '6px 12px', fontSize: '13px', borderRadius: '4px', border: '1px solid #a6a6a6', outline: 'none' }}
             >
-              Apply Filters API
-            </button>
+              <option value="">All Categories</option>
+              {categories.map(cat => (
+                <option key={cat.id} value={cat.slug || cat.id}>{cat.name}</option>
+              ))}
+            </select>
+
+            <select
+              value={sortOrder}
+              onChange={this.handleSortChange}
+              style={{ padding: '6px 12px', fontSize: '13px', borderRadius: '4px', border: '1px solid #a6a6a6', outline: 'none' }}
+            >
+              <option value="">Sort by: Featured</option>
+              <option value="asc">Price: Low to High</option>
+              <option value="desc">Price: High to Low</option>
+            </select>
           </div>
+
+          <button
+            onClick={this.handleApplyFilters}
+            style={{ 
+              padding: '6px 16px', 
+              backgroundColor: '#fff', 
+              color: '#0f1111', 
+              border: '1px solid #d5d9d9', 
+              borderRadius: '8px', 
+              fontSize: '13px', 
+              cursor: 'pointer', 
+              boxShadow: '0 2px 5px rgba(213,217,217,.5)',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            Apply API
+          </button>
         </div>
 
         {error && (
